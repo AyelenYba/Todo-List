@@ -9,6 +9,16 @@ const List = ({title}) => {
     const [todos, setTodos] = useState([]); 
 
     useEffect(() => {
+        
+        const getTodos = () => {
+            if (localStorage.getItem('todos') === null) {
+                localStorage.setItem('todos', JSON.stringify([]));    
+            } else {
+                let savedTodos = JSON.parse(localStorage.getItem('todos'));
+                setTodos(savedTodos);
+            };
+        };
+
         getTodos();
     }, []); //When the app starts
 
@@ -24,14 +34,7 @@ const List = ({title}) => {
     /*LocalStorage only allows to save a string, because of that I use JSON.stringify('miObject') to transform the
     object into a string. setItem is the function that allows to save the object in the local storage.*/
 
-    const getTodos = () => {
-        if (localStorage.getItem('todos') === null) {
-            localStorage.setItem('todos', JSON.stringify([]));    
-        } else {
-            let savedTodos = JSON.parse(localStorage.getItem('todos'));
-            setTodos(savedTodos);
-        }
-    }
+
 
     return (
         <div className='list'>
