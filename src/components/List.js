@@ -23,13 +23,14 @@ const List = ({title}) => {
     }, []); //When the app starts
 
     useEffect(() => {
+        //Save to Local everytime I create a new todo or delete it. 
+        const saveTodos = () => {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }; 
         saveTodos();
     }, [todos]); //Runs at initial render and after every rerender if data has changed.
 
-    //Save to Local everytime I create a new todo or delete it. 
-    const saveTodos = () => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }; 
+
 
     /*LocalStorage only allows to save a string, because of that I use JSON.stringify('miObject') to transform the
     object into a string. setItem is the function that allows to save the object in the local storage.*/
